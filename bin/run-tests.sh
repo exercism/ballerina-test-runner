@@ -20,18 +20,14 @@ for test_dir in tests/*; do
     results_file_path="${test_dir_path}/results.json"
     expected_results_file_path="${test_dir_path}/expected_results.json"
 
+    # Test exercise
     bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
+    echo "==== ${test_dir_name}: comparing ${results_file_path} to ${expected_results_file_path}"
 
-    # OPTIONAL: Normalize the results file
-    # If the results.json file contains information that changes between 
-    # different test runs (e.g. timing information or paths), you should normalize
-    # the results file to allow the diff comparison below to work as expected
-    # sed -i -E \
-    #   -e 's/Elapsed time: [0-9]+\.[0-9]+ seconds//g' \
-    #   -e "s~${test_dir_path}~/solution~g" \
-    #   "${results_file_path}"
-
-    echo "${test_dir_name}: comparing results.json to expected_results.json"
+    # Normalize the json output files
+    jq --sort-keys '.' "${results_file_path}" > result.tmp && mv result.tmp $results_file_path
+    jq --sort-keys '.' "${expected_results_file_path}" > expected.tmp && mv expected.tmp $expected_results_file_path
+    # Compare result JSON files
     diff "${results_file_path}" "${expected_results_file_path}"
 
     if [ $? -ne 0 ]; then
@@ -39,4 +35,5 @@ for test_dir in tests/*; do
     fi
 done
 
+echo "tests finished with exit code: ${exit_code}"
 exit ${exit_code}

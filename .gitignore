@@ -1,1 +1,4 @@
 tests/*/results.json
+target
+tmp
+*.tmp

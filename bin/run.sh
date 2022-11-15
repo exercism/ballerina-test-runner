@@ -20,8 +20,8 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     echo "usage: ./bin/run.sh exercise-slug path/to/solution/folder/ path/to/output/directory/"
     exit 1
 fi
-
 slug="$1"
+work_dir=$(pwd)
 solution_dir=$(realpath "${2%/}")
 output_dir=$(realpath "${3%/}")
 results_file="${output_dir}/results.json"
@@ -29,32 +29,48 @@ results_file="${output_dir}/results.json"
 # Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
-echo "${slug}: testing..."
 
-# Run the tests for the provided implementation file and redirect stdout and
-# stderr to capture it
-test_output=$(false)
-# TODO: substitute "false" with the actual command to run the test:
-# test_output=$(command_to_run_tests 2>&1)
+# Run the tests for the provided implementation file
+cd "$solution_dir" || exit
+# Output is saved at this location
+echo "==== ${slug}: testing..."
+test_output=""
+if ! [ -s *.bal ]; then
+    test_output="WARNING: student did not add code to the balllerina file."
+fi
+if [ ! -e Ballerina.toml ]; then
+    test_output="$test_output \n WARNING: student did not upload Ballerina.toml."
+fi
+if [ ! -e Dependencies.toml ]; then
+    test_output="$test_output \n WARNING: student did not upload Dependencies.toml."
+fi
+# The `--code-coverage` flag generates a test_results.json file
+# Capture err_msg from stderr output
+{ err_msg="$(bal test --code-coverage 2>&1 1>&3 3>&-)"; } 3>&1;
+if [ $? -ne 0 ]; then
+    test_output="$test_output \n Compile Failed: \n $err_msg"
+fi
 
-# Write the results.json file based on the exit code of the command that was 
-# just executed that tested the implementation file
-if [ $? -eq 0 ]; then
-    jq -n '{version: 1, status: "pass"}' > ${results_file}
+echo "==== ${slug} test output:  $test_output"
+
+test_output_file="$solution_dir/target/report/test_results.json"
+if test -f "$test_output_file"; then
+
+    # Write the results.json file based on the exit code of the command that was 
+    # just executed that tested the implementation file
+    failed=$(jq '.failed' $test_output_file)
+    if [ $failed -eq 0 ]; then
+        echo "${slug}: test passed"
+        jq -n '{version: 1, status: "pass"}' > ${results_file}
+    else
+        echo "${slug}: test failed; formatting results"
+        cd "$work_dir/bin/test-report-to-exercism-result" || exit
+        bal run -- -CreportFile="$test_output_file" -CtransformedFile="$results_file"
+    fi
 else
-    # OPTIONAL: Sanitize the output
-    # In some cases, the test output might be overly verbose, in which case stripping
-    # the unneeded information can be very helpful to the student
-    # sanitized_test_output=$(printf "${test_output}" | sed -n '/Test results:/,$p')
-
-    # OPTIONAL: Manually add colors to the output to help scanning the output for errors
-    # If the test output does not contain colors to help identify failing (or passing)
-    # tests, it can be helpful to manually add colors to the output
-    # colorized_test_output=$(echo "${test_output}" \
-    #      | GREP_COLOR='01;31' grep --color=always -E -e '^(ERROR:.*|.*failed)$|$' \
-    #      | GREP_COLOR='01;32' grep --color=always -E -e '^.*passed$|$')
-
+    echo "${slug}: test failed; exporting output"
     jq -n --arg output "${test_output}" '{version: 1, status: "fail", message: $output}' > ${results_file}
 fi
+
 
 echo "${slug}: done"
