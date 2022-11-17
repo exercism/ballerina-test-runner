@@ -8,5 +8,7 @@ bin/run-in-docker.sh
 bin/run-tests-in-docker.sh
 bin/run-tests.sh
 tests/
+!tests/example-success/*.toml
+!tests/example-success/*.bal
 .vscode
 target
