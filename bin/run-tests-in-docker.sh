@@ -15,9 +15,6 @@
 # Stop executing when a command returns a non-zero return code
 set -e
 
-# Add a ballerina sample to pull dependencies
-mkdir -p tmp/ballerina
-cp -r tests/example-success/* tmp/ballerina
 # Build the Docker image
 docker build --rm -t exercism/ballerina-test-runner .
 

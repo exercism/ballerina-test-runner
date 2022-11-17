@@ -3,9 +3,8 @@ FROM ballerina/ballerina:2201.2.3 AS build
 # Pull any ballerina package and download dependencies
 USER root
 WORKDIR /home/ballerina
-COPY tmp/ballerina/. /home/ballerina
+COPY tests/example-success/ .
 RUN bal build
-
 
 WORKDIR /opt/test-runner
 # copy needed files

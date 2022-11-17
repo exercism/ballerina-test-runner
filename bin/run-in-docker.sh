@@ -32,9 +32,6 @@ output_dir=$(realpath "${3%/}")
 # Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
-# Add the ballerina sample to pull dependencies
-mkdir -p tmp/ballerina
-cp -r $solution_dir/* tmp/ballerina
 # Build the Docker image
 docker build --rm -t exercism/ballerina-test-runner .
 
