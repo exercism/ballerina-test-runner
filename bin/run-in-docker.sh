@@ -32,15 +32,17 @@ output_dir=$(realpath "${3%/}")
 # Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
+# Add the ballerina sample to pull dependencies
+mkdir -p tmp/ballerina
+cp -r $solution_dir/* tmp/ballerina
 # Build the Docker image
-docker build --rm -t exercism/test-runner .
+docker build --rm -t exercism/ballerina-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
     --rm \
     --network none \
-    --read-only \
     --mount type=bind,src="${solution_dir}",dst=/solution \
     --mount type=bind,src="${output_dir}",dst=/output \
     --mount type=tmpfs,dst=/tmp \
-    exercism/test-runner "${slug}" /solution /output 
+    exercism/ballerina-test-runner "${slug}" /solution /output 

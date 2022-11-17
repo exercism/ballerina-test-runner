@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "message": "WARNING: student did not add code to the balllerina file. \\n WARNING: student did not upload Ballerina.toml. \\n WARNING: student did not upload Dependencies.toml. \\n Compile Failed: \\n ballerina: Invalid Ballerina package directory: /opt/test-runner/tests/example-empty-file, cannot find 'Ballerina.toml' file.\n\nUSAGE:\n    bal test [--offline]\n                   [<ballerina-file> | <package-path>] [(--key=value)...]",
   "status": "fail",
-  "message": "TODO: replace with correct output"
+  "version": 1
 }

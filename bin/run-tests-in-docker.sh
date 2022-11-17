@@ -15,17 +15,19 @@
 # Stop executing when a command returns a non-zero return code
 set -e
 
+# Add a ballerina sample to pull dependencies
+mkdir -p tmp/ballerina
+cp -r tests/example-success/* tmp/ballerina
 # Build the Docker image
-docker build --rm -t exercism/test-runner .
+docker build --rm -t exercism/ballerina-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
     --rm \
     --network none \
-    --read-only \
     --mount type=bind,src="${PWD}/tests",dst=/opt/test-runner/tests \
     --mount type=tmpfs,dst=/tmp \
     --volume "${PWD}/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
-    exercism/test-runner
+    exercism/ballerina-test-runner
