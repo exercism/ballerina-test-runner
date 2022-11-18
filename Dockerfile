@@ -1,11 +1,19 @@
-FROM ballerina/ballerina:2201.2.3
+FROM ballerina/ballerina:2201.2.3 AS build
+
+# Pull any ballerina package and download dependencies
+USER root
+WORKDIR /home/ballerina
+COPY bin/dep-cache.sh bin/dep-cache.sh
+RUN ./bin/dep-cache.sh
+
+FROM ballerina/ballerina:2201.2.3 AS runner
 
 # install packages required to run the tests
 USER root
 RUN apk add --no-cache jq coreutils
 
 # copy cached ballerina libraries
-RUN bal pull ballerina/io:1.2.2
+COPY --from=build /root/.ballerina/repositories /root/.ballerina/repositories
 
 WORKDIR /opt/test-runner
 
