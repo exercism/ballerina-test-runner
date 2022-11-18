@@ -3,8 +3,8 @@ FROM ballerina/ballerina:2201.2.3 AS build
 # Pull any ballerina package and download dependencies
 USER root
 WORKDIR /home/ballerina
-COPY tests/example-success/ .
-RUN bal build
+COPY bin/dep-cache.sh bin/dep-cache.sh
+RUN ./bin/dep-cache.sh
 
 FROM ballerina/ballerina:2201.2.3 AS runner
 
