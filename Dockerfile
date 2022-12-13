@@ -11,6 +11,7 @@ WORKDIR /opt/test-runner
 
 # copy shell script and json formatter
 COPY bin/run.sh bin/run.sh
-COPY test-report-to-exercism-result bin/test-report-to-exercism-result
+COPY bin/test-report-to-exercism-result bin/test-report-to-exercism-result
+RUN bal build bin/test-report-to-exercism-result
 
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]

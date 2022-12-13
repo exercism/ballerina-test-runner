@@ -46,7 +46,7 @@ if [ ! -e Dependencies.toml ]; then
 fi
 # The `--code-coverage` flag generates a test_results.json file
 # Capture err_msg from stderr output
-{ err_msg="$(bal test --code-coverage 2>&1 1>&3 3>&-)"; } 3>&1;
+{ err_msg="$(bal test --code-coverage --offline 2>&1 1>&3 3>&-)"; } 3>&1;
 if [ $? -ne 0 ]; then
     test_output="$test_output \n Compile Failed: \n $err_msg"
 fi
@@ -65,7 +65,7 @@ if test -f "$test_output_file"; then
     else
         echo "${slug}: test failed; formatting results"
         cd "$work_dir/bin/test-report-to-exercism-result" || exit
-        bal run -- -CreportFile="$test_output_file" -CtransformedFile="$results_file"
+        bal run target/bin/test_report_to_exercism_result.jar -CreportFile="$test_output_file" -CtransformedFile="$results_file"
     fi
 else
     echo "${slug}: test failed; exporting output"

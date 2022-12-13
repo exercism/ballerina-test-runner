@@ -32,6 +32,8 @@ for test_dir in tests/*; do
 
     if [ $? -ne 0 ]; then
         exit_code=1
+    else
+        echo "Test ${test_dir_name} successful!"
     fi
 done
 
