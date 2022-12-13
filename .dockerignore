@@ -11,4 +11,3 @@ tests/
 !tests/example-success/*.toml
 !tests/example-success/*.bal
 .vscode
-target
