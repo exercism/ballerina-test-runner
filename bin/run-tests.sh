@@ -31,9 +31,10 @@ for test_dir in tests/*; do
     diff "${results_file_path}" "${expected_results_file_path}"
 
     if [ $? -ne 0 ]; then
+        echo "${test_dir_name}: Result comparison failed!"
         exit_code=1
     else
-        echo "Test ${test_dir_name} successful!"
+        echo "${test_dir_name}: Result comparison successful!"
     fi
 done
 
