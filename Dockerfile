@@ -7,7 +7,7 @@ RUN apk add --no-cache jq coreutils
 # add ballerina libraries that would be pulled
 RUN bal pull ballerina/io:1.2.2
 # copy necessary platform jars
-COPY bin/platform-libs bin/platform-libs
+RUN mkdir -p bin/platform-libs/com/h2database/h2/2.0.206 && wget https://repo1.maven.org/maven2/com/h2database/h2/2.0.206/h2-2.0.206.jar -P bin/platform-libs/com/h2database/h2/2.0.206
 
 WORKDIR /opt/test-runner
 
