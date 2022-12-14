@@ -6,6 +6,8 @@ RUN apk add --no-cache jq coreutils
 
 # add ballerina libraries that would be pulled
 RUN bal pull ballerina/io:1.2.2
+# copy necessary platform jars
+COPY bin/platform-libs bin/platform-libs
 
 WORKDIR /opt/test-runner
 

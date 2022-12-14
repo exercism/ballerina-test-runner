@@ -29,7 +29,6 @@ results_file="${output_dir}/results.json"
 # Create the output directory if it doesn't exist
 mkdir -p "${output_dir}"
 
-
 # Run the tests for the provided implementation file
 cd "$solution_dir" || exit
 # Output is saved at this location
@@ -44,6 +43,11 @@ fi
 if [ ! -e Dependencies.toml ]; then
     test_output="$test_output \n WARNING: student did not upload Dependencies.toml."
 fi
+
+# move any platform-libs into the target dir for use in the exercise tests
+mkdir -p "$solution_dir/target/"
+cp -R $work_dir/bin/platform-libs $solution_dir/target/
+
 # The `--test-report` flag generates a test_results.json file
 # Capture err_msg from stderr output
 { err_msg="$(bal test --test-report --offline 2>&1 1>&3 3>&-)"; } 3>&1;
