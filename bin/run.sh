@@ -44,9 +44,9 @@ fi
 if [ ! -e Dependencies.toml ]; then
     test_output="$test_output \n WARNING: student did not upload Dependencies.toml."
 fi
-# The `--code-coverage` flag generates a test_results.json file
+# The `--test-report` flag generates a test_results.json file
 # Capture err_msg from stderr output
-{ err_msg="$(bal test --code-coverage --offline 2>&1 1>&3 3>&-)"; } 3>&1;
+{ err_msg="$(bal test --test-report --offline 2>&1 1>&3 3>&-)"; } 3>&1;
 if [ $? -ne 0 ]; then
     test_output="$test_output \n Compile Failed: \n $err_msg"
 fi
