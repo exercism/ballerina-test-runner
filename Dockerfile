@@ -1,11 +1,10 @@
-FROM ballerina/ballerina:2201.2.3
+FROM ballerina/ballerina:2201.5.0
 
 # install packages required to run the tests
 USER root
 RUN apk add --no-cache jq coreutils
 
 # add ballerina libraries that would be pulled
-RUN bal pull ballerina/io:1.2.2
 RUN bal pull ballerinax/java.jdbc:1.5.0
 
 WORKDIR /opt/test-runner

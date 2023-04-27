@@ -2,3 +2,4 @@ tests/*/results.json
 target
 tmp
 *.tmp
+bin/platform-libs/

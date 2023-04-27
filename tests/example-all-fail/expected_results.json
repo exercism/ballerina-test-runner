@@ -1,5 +1,5 @@
 {
-  "message": "::hello_world::\n\ntestFunc || Assertion Failed!\n \nexpected: 'Hello, World!'\nactual\t: 'Goodbye, Mars!'\n \nDiff\t:\n\n--- actual\n+++ expected \n \n @@ -1,1 +1,1 @@ \n \n -Goodbye, Mars!\n+Hello, World!\n\n\tat ballerina.test.0:createBallerinaError(assert.bal:43)\n\t   ballerina.test.0:assertEquals(assert.bal:112)\n\t   ballerina_exercism.hello_world$test.0.tests.hello_world_test:testFunc(tests/hello_world_test.bal:22)",
+  "message": "::hello_world::\n\ntestFunc || Assertion Failed!\n \nexpected: 'Hello, World!'\nactual\t: 'Goodbye, Mars!'\n \nDiff\t:\n\n--- actual\n+++ expected \n \n @@ -1,1 +1,1 @@ \n \n -Goodbye, Mars!\n+Hello, World!\n",
   "status": "fail",
   "version": 1
 }
