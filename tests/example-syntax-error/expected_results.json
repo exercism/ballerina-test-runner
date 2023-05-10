@@ -1,5 +1,5 @@
 {
-  "message": " \\n WARNING: student did not upload Dependencies.toml. \\n Compile Failed: \\n ERROR [hello_world.bal:(5:1,5:1)] missing semicolon token\nerror: compilation contains errors",
+  "message": "\nWARNING: student did not upload Dependencies.toml.\nCompile Failed:\nERROR [hello_world.bal:(5:1,5:1)] missing semicolon token\nerror: compilation contains errors",
   "status": "fail",
   "version": 1
 }
