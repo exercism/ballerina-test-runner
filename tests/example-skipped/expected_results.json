@@ -1,0 +1,5 @@
+{
+  "message": "::hello_world::\n\ntestFunc || success\ntestFunc2 || Assertion Failed!\n \nexpected: 'Goodbye, Mars!'\nactual\t: 'Hello, World!'\n \nDiff\t:\n\n--- actual\n+++ expected \n \n @@ -1,1 +1,1 @@ \n \n -Hello, World!\n+Goodbye, Mars!\n",
+  "status": "fail",
+  "version": 1
+}

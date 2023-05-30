@@ -55,6 +55,9 @@ fi
 mkdir -p "$solution_dir/target/"
 cp -R "$work_dir/bin/platform-libs" "$solution_dir/target/"
 
+# un-skip test cases (ref ballerina repo file bin/verify-exercises
+find ./tests -name '*.bal' -exec perl -i -pe 's/\benable:\s*false\b\s*,?//g' '{}' ';'
+
 # The `--test-report` flag generates a test_results.json file
 # Capture err_msg from stderr output
 { err_msg="$(bal test --test-report --offline 2>&1 1>&3 3>&-)"; } 3>&1;
