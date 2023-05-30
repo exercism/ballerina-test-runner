@@ -2,7 +2,7 @@ FROM ballerina/ballerina:2201.5.0
 
 # install packages required to run the tests
 USER root
-RUN apk add --no-cache jq coreutils
+RUN apk add --no-cache jq coreutils perl
 
 # add ballerina libraries that would be pulled
 RUN bal pull ballerinax/java.jdbc:1.5.0

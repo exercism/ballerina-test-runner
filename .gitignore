@@ -3,3 +3,4 @@ target
 tmp
 *.tmp
 bin/platform-libs/
+tests/example-db-access/tests/*.db
