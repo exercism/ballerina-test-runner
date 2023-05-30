@@ -13,6 +13,21 @@
 
 exit_code=0
 
+# in case we're not running in Docker:
+# i. fetch the platform-libs (in case we're not running in Docker)
+h2_dir=bin/platform-libs/com/h2database/h2/2.0.206
+if ! [ -d "$h2_dir" ]; then
+    url=https://repo1.maven.org/maven2/com/h2database/h2/2.0.206/h2-2.0.206.jar
+    mkdir -p "$h2_dir"
+    wget "$url" -P "$h2_dir"
+fi
+# ii. build the test report jar
+report_dir=bin/test-report-to-exercism-result
+jar=target/bin/test_report_to_exercism_result.jar
+if ! [ -f "$report_dir/$jar" ]; then
+    bal build "$report_dir"
+fi
+
 # Iterate over all test directories
 for test_dir in tests/*; do
     test_dir_name=$(basename "${test_dir}")
