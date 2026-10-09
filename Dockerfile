@@ -1,4 +1,4 @@
-FROM ballerina/ballerina:2201.5.0
+FROM ballerina/ballerina:2201.13.6
 
 # install packages required to run the tests
 USER root
