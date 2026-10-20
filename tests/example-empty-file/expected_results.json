@@ -1,5 +1,5 @@
 {
-  "message": "\nWARNING: the source file is empty.\nWARNING: Ballerina.toml is missing.\nWARNING: Dependencies.toml is missing.\nCompile Failed:\nballerina: Invalid Ballerina package directory: /opt/test-runner/tests/example-empty-file, cannot find 'Ballerina.toml' file.\n\nUSAGE:\n    bal test [--OPTIONS]\n                   [<ballerina-file> | <package-path>] [(-Ckey=value)...]",
+  "message": "\nWARNING: the source file is empty.\nWARNING: Ballerina.toml is missing.\nWARNING: Dependencies.toml is missing.\nCompile Failed:\nballerina: invalid package path: /opt/test-runner/tests/example-empty-file. Please provide a valid Ballerina package, workspace or a standalone file.\n\nUSAGE:\n    bal test [--OPTIONS]\n                   [<ballerina-file> | <package-path>] [(-Ckey=value)...]",
   "status": "fail",
   "version": 1
 }
