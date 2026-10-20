@@ -25,6 +25,7 @@ function testFunc() {
 // expect the test runner to re-enable this test, and it should fail
 @test:Config {
     enable: false,
+
     dependsOn: [testFunc]
 }
 function testFunc2() {
