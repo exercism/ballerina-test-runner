@@ -1,5 +1,5 @@
 {
-  "message": "::hello_world::\n\nhasMain || success\nsaysHello || Assertion Failed!\n \nexpected: 'Hello, World!'\nactual\t: 'Goodbye, Mars!'\n \nDiff\t:\n\n--- actual\n+++ expected \n \n @@ -1,1 +1,1 @@ \n \n -Goodbye, Mars!\n+Hello, World!\n",
+  "message": "::hello_world::\n\nhasMain || success\nsaysHello || error {ballerina/test:0}TestError (\"Assertion Failed!\n \nexpected: 'Hello, World!'\nactual\t: 'Goodbye, Mars!'\n \nDiff\t:\n\n--- actual\n+++ expected \n \n @@ -1,1 +1,1 @@ \n \n -Goodbye, Mars!\n+Hello, World!\n\")\n\tcallableName: createBallerinaError moduleName: ballerina.test.0 fileName: assert.bal lineNumber: 41\n\tcallableName: assertEquals moduleName: ballerina.test.0 fileName: assert.bal lineNumber: 109\n\tcallableName: saysHello moduleName: ballerina_exercism.hello_world$test.0.tests.hello_world_test fileName: tests/hello_world_test.bal lineNumber: 30\n\tcallableName: saysHello$lambda1$ moduleName: ballerina_exercism.hello_world$test.0.tests.test_execute-generated_1 fileName: tests/test_execute-generated_1.bal lineNumber: 5\n",
   "status": "fail",
   "version": 1
 }
