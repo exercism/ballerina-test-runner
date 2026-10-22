@@ -15,9 +15,9 @@ exit_code=0
 
 # in case we're not running in Docker:
 # i. fetch the platform-libs (in case we're not running in Docker)
-h2_dir=bin/platform-libs/com/h2database/h2/2.0.206
+h2_dir=bin/platform-libs/com/h2database/h2/2.5.252
 if ! [ -d "$h2_dir" ]; then
-    url=https://repo1.maven.org/maven2/com/h2database/h2/2.0.206/h2-2.0.206.jar
+    url=https://repo1.maven.org/maven2/com/h2database/h2/2.5.252/h2-2.5.252.jar
     mkdir -p "$h2_dir"
     wget "$url" -P "$h2_dir"
 fi

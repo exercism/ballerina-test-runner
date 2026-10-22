@@ -1,20 +1,17 @@
-FROM ballerina/ballerina:2201.9.0
-
-# install packages required to run the tests
+FROM ballerina/ballerina:2201.13.3
 USER root
-RUN apk add --no-cache jq coreutils perl
 
-# add ballerina libraries that would be pulled
-RUN bal pull ballerinax/java.jdbc:1.5.0
+ARG H2DB_VER=2.5.252
+ADD "https://search.maven.org/remotecontent?filepath=com/h2database/h2/${H2DB_VER}/h2-${H2DB_VER}.jar" "/opt/test-runner/bin/platform-libs/com/h2database/h2/${H2DB_VER}/h2-${H2DB_VER}.jar"
+
+RUN apk add --no-cache jq coreutils perl
+RUN bal pull ballerinax/java.jdbc:1.15.1
 
 WORKDIR /opt/test-runner
 
-# copy necessary platform jars
-RUN mkdir -p bin/platform-libs/com/h2database/h2/2.0.206 && wget https://repo1.maven.org/maven2/com/h2database/h2/2.0.206/h2-2.0.206.jar -P bin/platform-libs/com/h2database/h2/2.0.206
-
-# copy shell script and json formatter
 COPY bin/run.sh bin/run.sh
 COPY bin/test-report-to-exercism-result bin/test-report-to-exercism-result
+
 RUN bal build bin/test-report-to-exercism-result
 
 ENTRYPOINT ["/opt/test-runner/bin/run.sh"]
