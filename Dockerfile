@@ -1,4 +1,4 @@
-FROM ballerina/ballerina:2201.13.3
+FROM ballerina/ballerina:2201.14.1
 USER root
 
 ARG H2DB_VER=2.5.252
